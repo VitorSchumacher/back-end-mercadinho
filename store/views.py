@@ -85,3 +85,10 @@ class OneProductView(APIView):
         product = Products.get_products_by_id(request.query_params.get('ids'))
         serializer = ProductsSerializer(product, many=True)
         return Response(serializer.data, status=200)
+
+class CategoriesView(APIView): 
+    def get(self, request):
+        print(request)
+        product = Products.get_all_products_by_categoryid(request.query_params.get('category_id'))
+        serializer = ProductsSerializer(product, many=True)
+        return Response(serializer.data, status=200)
