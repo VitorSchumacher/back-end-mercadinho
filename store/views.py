@@ -78,3 +78,10 @@ class CustomerView(APIView):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
+
+class OneProductView(APIView):
+    def get(self, request):
+        print(request)
+        product = Products.get_products_by_id(request.query_params.get('ids'))
+        serializer = ProductsSerializer(product, many=True)
+        return Response(serializer.data, status=200)
