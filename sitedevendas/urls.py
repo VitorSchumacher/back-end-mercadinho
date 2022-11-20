@@ -3,7 +3,7 @@ from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from . import settings
 
-from store.views import UserView , OrderView, CategoryView, ProductView, CustomerView, OneProductView,CategoriesView
+from store.views import UserView , OrderView, CategoryView, ProductView, CustomerView, OneProductView,CategoriesView, LoginView,CategoryDeleteView,ProductDeleteView
 
 
 urlpatterns = [
@@ -15,6 +15,9 @@ re_path(r'^product/$', ProductView.as_view()),
 re_path(r'^customer/$', CustomerView.as_view()),
 re_path(r'^product-one/$', OneProductView.as_view()),
 re_path(r'^category-one/$', CategoriesView.as_view()),
+re_path(r'^category-delete/$', CategoryDeleteView.as_view()),
+re_path(r'^product-delete/$', ProductDeleteView.as_view()),
+
 
 
 

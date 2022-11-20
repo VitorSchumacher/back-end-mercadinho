@@ -9,6 +9,9 @@ class Category(models.Model):
         return Category.objects.all()
     def __str__(self):
         return self.name
+    def delete_by_id(id):
+        return Category.objects.filter(id=id).delete()
+
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -47,6 +50,9 @@ class Products(models.Model):
             return Products.objects.filter(category=category_id)
         else:
             return Products.get_all_products()
+    def delete_product(product_id):
+        return Products.objects.filter(id=product_id).delete()
+
 class Order(models.Model):
     product = models.ForeignKey(Products,
     on_delete=models.CASCADE)

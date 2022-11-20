@@ -22,6 +22,7 @@ class CategoryView(APIView):
         else:
             return Response(serializer.errors, status=400)
 
+
 class UserView(APIView):
     def get(self, request):
         user = User.objects.all()
@@ -65,6 +66,13 @@ class ProductView(APIView):
         else: 
             return Response(serializer.errors, status=400)
 
+class ProductDeleteView(APIView):
+    def get(self, request):
+        id=request.query_params.get('id_prod')
+        print(id)
+        Products.delete_product(id)
+        return Response(status=204)
+
 class CustomerView(APIView):
     def get(self, request):
         customer = Customer.objects.all()
@@ -92,3 +100,20 @@ class CategoriesView(APIView):
         product = Products.get_all_products_by_categoryid(request.query_params.get('category_id'))
         serializer = ProductsSerializer(product, many=True)
         return Response(serializer.data, status=200)
+
+
+class CategoryDeleteView(APIView):
+    def get(self, request):
+        id=request.query_params.get('id_cat')
+        print(id)
+        Category.delete_by_id(id)
+        return Response(status=204)
+
+
+class LoginView(APIView):
+    def get(self, request):
+        user = Customer.isExists(request.query_params.get('self'))
+        serializer = CustomerSerializer(user, many=True)
+        return Response(serializer.data, status=200)
+
+
